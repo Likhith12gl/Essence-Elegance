@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Essence Elegance</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/ea0f4f62d2.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <header>
+        <img src="logo.png" alt="logo">
+        <h1>Essence Elegance</h1>
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="perfume.html">Our Perfumes</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="#" id="search-icon"><i class="fas fa-search"></i></a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="home">
+            <h2>Welcome to Essence Elegance</h2>
+            <p>Discover the art of fragrance with our exquisite collection of perfumes.</p>
+        </section>
+
+        <section id="testimonials">
+            <h2>Customer Testimonials</h2>
+            <div class="testimonial-grid" id="testimonial-grid">
+                <!-- Testimonials will be populated here -->
+            </div>
+
+            <button id="leave-testimonial">Leave a Testimonial</button>
+
+            <div id="testimonial-form" style="display: none;">
+                <form id="testimonial-form-element">
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" required>
+                    <label for="message">Feedback:</label>
+                    <textarea id="message" required></textarea>
+                    <button type="submit">Submit</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2023 Essence Elegance. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Toggle the testimonial form visibility
+        document.getElementById('leave-testimonial').addEventListener('click', function() {
+            document.getElementById('testimonial-form').style.display = 'block';
+        });
+
+        // Fetch testimonials from the backend
+        async function loadTestimonials() {
+            try {
+                const response = await fetch('http://localhost:5000/testimonials');
+                const testimonials = await response.json();
+
+                const testimonialGrid = document.getElementById('testimonial-grid');
+                testimonialGrid.innerHTML = ''; // Clear previous testimonials
+
+                testimonials.forEach(testimonial => {
+                    const testimonialHTML = `
+                        <div class="testimonial-item">
+                            <p>"${testimonial.message}"</p>
+                            <p>- ${testimonial.name}</p>
+                        </div>
+                    `;
+                    testimonialGrid.innerHTML += testimonialHTML;
+                });
+            } catch (err) {
+                console.error('Error loading testimonials:', err);
+            }
+        }
+
+        // Submit new testimonial
+        document.getElementById('testimonial-form-element').addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            const name = document.getElementById('name').value;
+            const message = document.getElementById('message').value;
+
+            try {
+                const response = await fetch('http://localhost:5000/testimonials', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ name, message })
+                });
+
+                if (response.ok) {
+                    // Clear the form and hide it
+                    document.getElementById('name').value = '';
+                    document.getElementById('message').value = '';
+                    document.getElementById('testimonial-form').style.display = 'none';
+
+                    // Reload testimonials to show the newly added one
+                    loadTestimonials();
+                } else {
+                    console.error('Failed to submit testimonial');
+                }
+            } catch (err) {
+                console.error('Error submitting testimonial:', err);
+            }
+        });
+
+        // Load testimonials when the page loads
+        window.onload = loadTestimonials;
+    </script>
+</body>
+</html>

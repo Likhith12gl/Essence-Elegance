@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>perfumes</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="contact.js"></script>
+</head>
+<body>
+    <header>
+        <img src="logo.png" alt="logo">
+        <h1>Essence Elegance</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="#products">Our Perfumes</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li>    
+                    <a href="#" id="search-icon"><i class="fas fa-search"></i></a>
+                    <div id="search-container" style="display: none;">
+                        <input type="text" id="search-input" placeholder="Search..." list="search-suggestions">
+                        <datalist id="search-suggestions">
+                            <option value="Perfumes">
+                            <option value="Fragrances">
+                            <option value="Scents">
+                            <option value="Brands">
+                            <option value="Collections">
+                        </datalist>
+                    </div>  
+                    <script>
+                        document.getElementById('search-icon').addEventListener('click', function(e) {
+                            e.preventDefault();
+                            var searchContainer = document.getElementById('search-container');
+                            searchContainer.style.display = searchContainer.style.display === 'none' ? 'block' : 'none';
+                            if (searchContainer.style.display === 'block') {
+                                document.getElementById('search-input').focus();
+                            }
+                        });
+                        document.getElementById('search-input').addEventListener('input', function() {
+                            console.log('Searching for:', this.value);
+                        });
+                    </script>   
+                </li>
+                <li><a href="#cart"><i class="fas fa-shopping-cart"></i></a></li>
+            </ul>
+        </nav>
+    </header>
+    <h1>Contact Us</h1>
+    <p>We would love to hear from you! Please fill out the form below to get in touch with us.</p>
+    <form action="#" method="post">
+        <label for="name">Name:</label><br>
+        <input type="text" id="name" name="name" required><br>
+        <label for="email">Email:</label><br>
+        <input type="email" id="email" name="email" required><br>
+        <label for="message">Message:</label><br>
+        <textarea id="message" name="message" required></textarea><br>
+        <button type="submit">Send</button>
+    </form>
+    <section id="map">
+        <h2>Our Location</h2>
+        <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3592.6881792754424!2d-80.19178908497825!3d25.76490898363984!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88d9b6823af5b959%3A0x55985f047ff14d4f!2sBrickell%2C%20Miami%2C%20FL%2033130!5e0!3m2!1sen!2sus!4v1623252345678!5m2!1sen!2sus"
+            width="100%"
+            height="450"
+            style="border:0;"
+            allowfullscreen=""
+            loading="lazy">
+        </iframe>
+    </section>
+    <section id="contact">
+        <img src="contact.jpg" alt="contact">
+        <h2>Contact Information</h2>
+        <p>If you have any questions or need assistance, please don't hesitate to contact us.</p>
+        <p>Email: info@essenceelegance.com</p>
+        <p>Phone: +1 (555) 123-4567</p>
+        <p>Address: 1234 Perfume Lane, Fragrance City, FL 33130</p> 
+    </section>
+    <footer>
+       
+        <table>
+            <tr>
+                <td>
+                    <p>Contact us at:</p>
+                    <p>Email: info@essenceelegance.com</p>
+                    <p>Phone: +1 (555) 123-4567</p>
+                    <p>Address: 1234 Perfume Lane, Fragrance City, FL 33130</p>
+                </td>
+                <td>
+                    <p>Follow us on social media:</p>
+                    <ul>
+                        <li><a href="#">Facebook</a></li>
+                        <li><a href="#">Instagram</a></li>
+                        <li><a href="#">Twitter</a></li>
+                    </ul>
+                    <p>Subscribe to our newsletter:</p>
+                    <form action="#" method="post">
+                        <input type="email" id="email" name="email" required>   
+                        <button type="submit">Subscribe</button>
+                    </form>
+                </td>
+            </tr>
+        </table>
+        <p>&copy; 2023 Essence Elegance. All rights reserved.</p>
+
+    </footer>
+</body>
+</html>
